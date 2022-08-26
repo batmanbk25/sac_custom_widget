@@ -333,13 +333,14 @@
                                         result.push(csv);
                                     }
                                     result = result.join("[$@~!~@$]")
-									console.log(["result: ", result]);
                                 }
                             });
 
                             if (correctsheet) {
 								console.log(["result: ", result]);
                                 var lengthfield = result.split("[$@~!~@$]")[0].split("[#@~!~@#]").length;
+                                var items = result.split("[$@~!~@$]")[0].split("[#@~!~@#]");
+								console.log(["items: ", items]);
                                 console.log("lengthfield: " + lengthfield);
 
                                 var total = this_.getView().byId("total");
