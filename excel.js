@@ -419,7 +419,7 @@
                                             this.settings = {};
                                             this.settings.result = "";
 
-											console.log(["onStart"]);
+					    console.log(["onStart"]);
                                             that.dispatchEvent(new CustomEvent("onStart", {
                                                 detail: {
                                                     settings: this.settings
@@ -432,7 +432,7 @@
 
 
                                         fU.setValue("");
-										console.log(["End"]);
+					console.log(["End"]);
                                     }
                                 } else {
                                     this_.runNext();
