@@ -337,6 +337,7 @@
                             });
 
                             if (correctsheet) {
+                                console.log("result: " + result);
                                 var lengthfield = result.split("[$@~!~@$]")[0].split("[#@~!~@#]").length;
                                 console.log("lengthfield: " + lengthfield);
 
