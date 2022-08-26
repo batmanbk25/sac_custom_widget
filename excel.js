@@ -333,6 +333,7 @@
                                         result.push(csv);
                                     }
                                     result = result.join("[$@~!~@$]")
+									console.log("result: " + result);
                                 }
                             });
 
