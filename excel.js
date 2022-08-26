@@ -406,6 +406,9 @@
                                         console.log(["result_final", result_final]);
                                         // oModel.loadData("processData.xsjs", JSON.stringify(result_final), true, 'POST', false, true, oHeaders);
 
+                                        console.log(["Close"]);
+                                        this_.runNext();
+											
                                         oModel.attachRequestCompleted(function() {
                                             var result = oModel.getData();
                                             console.log(result);
