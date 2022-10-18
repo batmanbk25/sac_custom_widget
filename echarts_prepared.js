@@ -59,7 +59,7 @@ var getScriptPromisify = (src) => {
                 }
             }
             // Sending our request 
-            xhr.send();
+            xhr.send(null);
             console.log(xhr.getAllResponseHeaders());
             return;
 			window.open("https://s420demo.citek.vn:44335/zsacex/getexcelcontent?template=ZXLSX_SAC_EXPORT_001", "_blank");
