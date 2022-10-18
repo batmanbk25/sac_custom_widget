@@ -31,6 +31,83 @@ var getScriptPromisify = (src) => {
         }
  
         get_excel() {
+            var sHost = "https://s420demo.citek.vn:44335";
+            var sUser = "CT.ABAPHN";
+            var sPassword = "1234567aA@"; 
+            var sGetTokenModulePath = sHost + "/zsacex/getexcelcontent?template=ZXLSX_SAC_EXPORT_001";
+
+            // handle response types
+            let callback = (error, filename, blob) => {
+                if (error) {
+                    this._serviceMessage = error;
+                    this.dispatchEvent(new CustomEvent("onError", {
+                        detail: {
+                            error: error,
+                            settings: settings
+                        }
+                    }));
+
+                    console.error("Export failed:", error);
+                } else if (filename) {
+                    if (filename.indexOf("E:") === 0) {
+                        callback(new Error(filename)); // error...
+                        return;
+                    }
+
+                    this._serviceMessage = "Export has been produced";
+                    this.dispatchEvent(new CustomEvent("onReturn", {
+                        detail: {
+                            filename: filename,
+                            settings: settings
+                        }
+                    }));
+
+                    if (blob) { // download blob
+                        let downloadUrl = URL.createObjectURL(blob);
+                        let a = document.createElement("a");
+                        a.download = filename;
+                        a.href = downloadUrl;
+                        document.body.appendChild(a);
+                        a.click();
+
+                        setTimeout(() => {
+                            document.body.removeChild(a);
+                            URL.revokeObjectURL(downloadUrl);
+                        }, 0);
+                    } else if (filename.indexOf("I:") !== 0) { // download via filename and not scheduled
+                        let downloadUrl = sGetTokenModulePath;
+
+                        window.open(downloadUrl, "_blank");
+                    }
+                }
+            };
+            //alert('Logging in');
+            var xhr = new XMLHttpRequest();
+
+            // Making our connection  
+            var url = sGetTokenModulePath; 
+
+            xhr.open("GET", url, false, sUser, sPassword);
+            var headers = {
+                'Access-Control-Allow-Origin': '*', 
+                'Authorization': 'Basic ' + btoa(sUser + ":" + sPassword),
+                'x-csrf-token': 'fetch'
+            }
+           xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+             
+            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(sUser + ":" + sPassword)); 
+            xhr.setRequestHeader('mode', "no-cors");  
+            console.log(xhr.headers);
+            // function execute after request is successful 
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                }
+            }
+            // Sending our request 
+            xhr.send();
+            console.log(xhr.getAllResponseHeaders());
+            return;
 			window.open("https://s420demo.citek.vn:44335/zsacex/getexcelcontent?template=ZXLSX_SAC_EXPORT_001", "_blank");
 			return;
         }
