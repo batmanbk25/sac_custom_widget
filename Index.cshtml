@@ -1,0 +1,14 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<script type="text/javascript" src="./js/LoginSAP.js"></script> 
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <button id="login" name="login" value="Login" onclick="doLogin()">Login</button>
+    <input type="button" id="login2" name="login" value="Login" onclick="doLogin()"/> 
+    <asp:Button ID="btnFromCalOpen" runat="server" Text=" &gt; " onclick="doLogin()" CssClass="SElementHide" />
+</div>
